@@ -62,20 +62,31 @@
 
 //});
 
-	$(window).on("touchstart", function(ev) {
+	/*$(window).on("touchstart", function(ev) {
 	    var e = ev.originalEvent;
 	    console.log(e.touches);
 	    alert("test");
-	});
+	});*/
 
 
 	//global variable
 	click = 0;
 
-	//function OpenWin(){
-	//  window.location = "test.html";
-	//}//end OpenWin
+	$(window).on("touchstart", function(ev) {
+	    //this is to reset the selection
+		if(click == 2) {
+			click = 0;
+			//alert(click);
+			//audioplayer = $("#audio-player");
+			//audioplayer.stop();
+		//	stopAudio();
+		}
+		click = click + 1;
+		$('.numberOfTaps .tapValue').html(click);
+	});
 
+
+/*
 	//count the number of times the user taps the screen (for language selection)
 	function trackNumClick() {
 		//this is to reset the selection
@@ -90,6 +101,7 @@
 		$('.numberOfTaps .tapValue').html(click);
 
 	}//end trackNumClick
+*/
 
 	function stopAudio() {
 		//alert("hello");
