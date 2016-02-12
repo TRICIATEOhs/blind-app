@@ -62,9 +62,11 @@
 
 //});
 
-	$('body').on('touchstart', function(e){
-		alert("test");
-	}
+	$(window).on("touchstart", function(ev) {
+	    var e = ev.originalEvent;
+	    console.log(e.touches);
+	    alert("test");
+	});
 
 
 	//global variable
