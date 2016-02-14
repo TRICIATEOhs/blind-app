@@ -62,32 +62,6 @@
 
 <script>
 
-	$(window).on("mobileinit", function(){
-
-	  $(function() {
-		    $('#play_audio_btn').click();
-		});
-
-		$('#play_audio_btn').click(function() {
-			var audioPlayer = document.getElementById('audio-player');
-	    	audioPlayer.play();
-		});
-		
-	});
-
-	$(window).on("touchstart", function(){
-
-	  $(function() {
-		    $('#play_audio_btn').click();
-		});
-
-		$('#play_audio_btn').click(function() {
-			var audioPlayer = document.getElementById('audio-player');
-	    	audioPlayer.play();
-		});
-		
-	});
-
 	/*$(document).ready(function () {
 
 		$(function() {
@@ -115,6 +89,8 @@
 		}
 		click = click + 1;
 		$('.numberOfTaps .tapValue').html(click);
+		var audioPlayer = document.getElementById('audio-player');
+    	audioPlayer.play();
 	});
 
 
