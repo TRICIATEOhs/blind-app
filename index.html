@@ -20,8 +20,8 @@
 			}
 
 			#start_btn {
-				height: 400px;
-				width: 700px;
+				height: 1000px;
+				width: 800px;
 			}
 
 		</style>
@@ -59,7 +59,7 @@
 
 			<div class="row">
 				<div class="btn-group" role="group">
-				  <button type="button" class="btn btn-Primary col-md-12" id="start_btn">Start</button>
+				  <button type="button" class="btn btn-info col-md-12" id="start_btn"><font size="8">START AUDIO GUIDE</font></button>
 				</div>
 			</div>
 
@@ -78,17 +78,10 @@
 
 	$(document).ready(function () {
 
-		var audioPlayer = document.getElementById('audio-player');
-	   	//audioPlayer.play();
-
-		/*$(function() {
-		    $('#play_audio_btn').click();
-		});
-
-		$('#play_audio_btn').click(function() {
+		$('#start_btn').click(function() {
 			var audioPlayer = document.getElementById('audio-player');
-	    	//audioPlayer.play();
-		});*/
+	    	audioPlayer.play();
+		});
 
 	});
 
