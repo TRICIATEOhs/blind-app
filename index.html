@@ -15,6 +15,15 @@
 				margin:0 auto;
 			}
 
+			#audio-player {
+				opacity: 0.1;
+			}
+
+			#start_btn {
+				height: 400px;
+				width: 700px;
+			}
+
 		</style>
 	</head>
 	<!--<body onclick="trackNumClick()">-->
@@ -31,11 +40,8 @@
 					  <source src="sound-guide/Full Language Selection.mp3" type="audio/mpeg">
 					  Your browser does not support the audio element.
 					</audio>
-					<div class="btn-group" role="group">
-					  <button type="button" class="btn btn-primary" id="play_audio_btn">Play</button>
-					</div>
 
-				  <h1>Language Selection <small><i>in process...</i></small></h1>
+					<h1>Language Selection <small><i>in process...</i></small></h1>
 				</div>
 			</div>
 
@@ -49,8 +55,15 @@
 				</div>
 			</div>
 
+			<br/>
+
 			<div class="row">
-				<br/><br>
+				<div class="btn-group" role="group">
+				  <button type="button" class="btn btn-Primary col-md-12" id="start_btn">Start</button>
+				</div>
+			</div>
+
+			<div class="row">
 				<div class="col-md-12 numberOfTaps">
 					<b><font size="6">Current Number of Taps <br/><u><span class="tapValue">0</span></u></font></b>
 				</div>
@@ -66,7 +79,7 @@
 	$(document).ready(function () {
 
 		var audioPlayer = document.getElementById('audio-player');
-	   	audioPlayer.play();
+	   	//audioPlayer.play();
 
 		/*$(function() {
 		    $('#play_audio_btn').click();
