@@ -87,10 +87,13 @@
 
 	$(document).ready(function () {
 
-		if (window.navigator && window.navigator.vibrate) {
-		   alert("shake");
+		// enable vibration support
+		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+		 
+		if (navigator.vibrate) {
+		    alert("support");
 		} else {
-		   alert("not supported");
+			alert("not supported");
 		}
 
 		/*
