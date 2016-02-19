@@ -91,10 +91,11 @@
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 		 
 		if (navigator.vibrate) {
-		    alert("support");
+		    navigator.vibrate([3000, 2000, 1000]);
 		} else {
 			alert("not supported");
 		}
+
 
 		/*
 		//this part is to store the data into firebase
