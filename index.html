@@ -87,13 +87,17 @@
 
 	$(document).ready(function () {
 
+		var audioPlayer = document.getElementById('audio-player');
+    	audioPlayer.play();
+
 		// enable vibration support
 		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 		 
 		if (navigator.vibrate) {
-		    navigator.vibrate([3000, 2000, 1000]);
+		    //navigator.vibrate([3000, 2000, 1000]);
+		    //alert("supported");
 		} else {
-			alert("not supported");
+			//alert("not supported");
 		}
 
 
