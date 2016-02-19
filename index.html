@@ -3,6 +3,7 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 		<style>
 			#mainDiv {
     			margin-left: 35px;
@@ -16,7 +17,7 @@
 			}
 
 			#audio-player {
-				opacity: 0.1;
+				opacity: 0.0; /* This is to make the audio tag transparent/invisible */
 			}
 
 			#start_btn {
@@ -28,6 +29,7 @@
 	</head>
 	<!--<body onclick="trackNumClick()">-->
 	<body onclick="trackNumClick()">
+
 		<title>Blind Man App</title>
 		
 		<div id="mainDiv">
@@ -59,70 +61,107 @@
 
 			<div class="row">
 				<div class="btn-group" role="group">
-				  <button type="button" class="btn btn-info col-md-12" id="start_btn"><font size="8">START AUDIO GUIDE</font></button>
+				  <button type="button" class="btn btn-info col-md-12" id="start_btn">
+				  	<font size="8">TAP TO START</font></button>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-md-12 numberOfTaps">
-					<b><font size="6">Current Number of Taps <br/><u><span class="tapValue">0</span></u></font></b>
+					<b><font size="6">Selected Language <br/><u><span class="tapValue"><font color="red">-</font></span></u></font></b>
 				</div>
 			</div>
 
 		</div>
-
 	</body>
 </html>
 
 <script>
 
+	//global variable
+	click = 0;
+	mobile_usage = false;
+	tap_list = ['-', '-', 'English', 'Mandarin'];
+	var timeout = 0;
+
+
 	$(document).ready(function () {
 
-		$('#start_btn').click(function() {
-			var audioPlayer = document.getElementById('audio-player');
-	    	audioPlayer.play();
-		});
+		if (window.navigator && window.navigator.vibrate) {
+		   alert("shake");
+		} else {
+		   alert("not supported");
+		}
+
+		/*
+		//this part is to store the data into firebase
+		var myDataRef = new Firebase('https://resplendent-heat-1005.firebaseio.com/');
+		var name = "User1";
+      	var text = "Happy Birthday";
+      	myDataRef.set({name: name, text: text});
+      	//myDataRef.push({name: name, text: text}); to append to list
+		myDataRef.on('child_added', function(snapshot) {
+			var message = snapshot.val();
+			//displayChatMessage(message.name, message.text); this is a created method to display the chat message
+		}); */
 
 	});
 
-	//global variable
-	click = 0;
 
 	$(window).on("touchstart", function(ev) {
+		mobile_usage = true;
 	    //this is to reset the selection
-		if(click == 2) {
-			click = 0;
-			//alert(click);
-			//audioplayer = $("#audio-player");
-			//audioplayer.stop();
-		//	stopAudio();
+		if(click == 3) {
+			click = 1;
 		}
 		click = click + 1;
-		$('.numberOfTaps .tapValue').html(click);
+		$('.numberOfTaps .tapValue').html('<font color="red">' + tap_list[click] + '</font>');
 	});
 
 
 	//count the number of times the user taps the screen (for language selection)
 	function trackNumClick() {
-		//this is to reset the selection
-		if(click == 2) {
-			click = 0;
-			//alert(click);
-			//audioplayer = $("#audio-player");
-			//audioplayer.stop();
-		//	stopAudio();
-		}
-		click = click + 1;
-		$('.numberOfTaps .tapValue').html(click);
+		if(!mobile_usage) {
+
+			//this is to reset the selection
+			if(click == 3) {
+				click = 1;
+			}
+			click = click + 1;
+			$('.numberOfTaps .tapValue').html('<font color="red">' + tap_list[click] + '</font>');
+
+			if(tap_list[click] != "-") {
+				clearTimeout(timeout);
+				timeout = setTimeout(function()
+			    {
+			        alert("You have selected " + tap_list[click]);
+			    }, 2500);
+				//language_chosen(tap_list[click]);
+			}
+
+		}//end if mobile_usage
 
 	}//end trackNumClick
 
+
+	$('#start_btn').click(function() {
+		var audioPlayer = document.getElementById('audio-player');
+    	audioPlayer.play();
+    	$('#start_btn').hide();
+	});
+
 	function stopAudio() {
-		//alert("hello");
 	    var audioPlayer = document.getElementById('audio-player');
 	    audioPlayer.pause();
 	    //audioPlayer.currentTime = 0;
 	}//stopAudio()
+
+
+	function language_chosen(language) {
+    	setTimeout(function(){ alert("You have selected " + language); }, 3000);
+	}//language_chosen
+
+
 
 
 
