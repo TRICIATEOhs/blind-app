@@ -17,7 +17,7 @@
 			}
 
 			#audio-player {
-				opacity: 0.0; /* This is to make the audio tag transparent/invisible */
+				opacity: 0.1; /* This is to make the audio tag transparent/invisible */
 			}
 
 			#start_btn {
@@ -84,20 +84,19 @@
 	tap_list = ['-', '-', 'English', 'Mandarin'];
 	var timeout = 0;
 
+	// enable vibration support
+	navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 	$(document).ready(function () {
 
-		// enable vibration support
-		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-		 
-		if (navigator.vibrate) {
-		    //navigator.vibrate([3000, 2000, 1000]);
-		    alert("supported");
-		} else {
-			alert("not supported");
-		}
-
-
+		
+		//once the app is launched, the user will feel a vibration, which will trigger the user to tap the screen once
+		var start_vibrate = setTimeout(function()
+						    {
+				        		if (navigator.vibrate) {
+								    navigator.vibrate(2000);
+								}
+						    }, 2000);
 		/*
 		//this part is to store the data into firebase
 		var myDataRef = new Firebase('https://resplendent-heat-1005.firebaseio.com/');
@@ -139,9 +138,12 @@
 				clearTimeout(timeout);
 				timeout = setTimeout(function()
 			    {
-			        alert("You have selected " + tap_list[click]);
+			        stopAudio();
+			        //alert("You have selected " + tap_list[click]);
+			        // after they have selected the language, page will be redirected
+			        window.location.href="bus_number.html?selected_language=" + tap_list[click];
 			    }, 2500);
-				//language_chosen(tap_list[click]);
+
 			}
 
 		}//end if mobile_usage
@@ -160,12 +162,6 @@
 	    audioPlayer.pause();
 	    //audioPlayer.currentTime = 0;
 	}//stopAudio()
-
-
-	function language_chosen(language) {
-    	setTimeout(function(){ alert("You have selected " + language); }, 3000);
-	}//language_chosen
-
 
 
 
