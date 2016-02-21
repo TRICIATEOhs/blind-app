@@ -94,7 +94,7 @@
 		var start_vibrate = setTimeout(function()
 						    {
 				        		if (navigator.vibrate) {
-								    navigator.vibrate(2000);
+								    navigator.vibrate(1000);
 								}
 						    }, 2000);
 		/*
@@ -141,7 +141,8 @@
 			        stopAudio();
 			        //alert("You have selected " + tap_list[click]);
 			        // after they have selected the language, page will be redirected
-			        window.location.href="bus_number.html?selected_language=" + tap_list[click];
+			        location.href="bus_number.html?selected_language=" + tap_list[click];
+			        //window.location.href="bus_number.html?selected_language=" + tap_list[click];
 			    }, 2500);
 
 			}
