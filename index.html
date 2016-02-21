@@ -140,11 +140,12 @@
 				timeout = setTimeout(function()
 			    {
 			        stopAudio();
+			        alert("im in");
 			        //alert("You have selected " + tap_list[click]);
 			        // after they have selected the language, page will be redirected
 			        //location.href="bus_number.html?selected_language=" + tap_list[click];
 			        window.location.replace("bus_number.html?selected_language=" + tap_list[click]);
-			        //$.mobile.changePage( "bus_number.html?selected_language=" + tap_list[click], { transition: "slideup", changeHash: false });
+			        //$.mobile.changePage( "bus_number.html?selected_language=" + tap_list[click], { transition: "slideup", changeHash: false })
 			    }, 2500);
 
 			}
