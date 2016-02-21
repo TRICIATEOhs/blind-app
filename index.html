@@ -1,9 +1,10 @@
 <html>
-	<head>		
+	<head>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+
 
 		<style>
 			#mainDiv {
@@ -121,6 +122,16 @@
 		}
 		click = click + 1;
 		$('.numberOfTaps .tapValue').html('<font color="red">' + tap_list[click] + '</font>');
+
+		if(tap_list[click] != "-") {
+			clearTimeout(timeout);
+			timeout = setTimeout(function()
+		    {
+		        stopAudio();
+		        window.location.replace("bus_number.html?selected_language=" + tap_list[click]);
+		        
+		    }, 2500);
+		}
 	});
 
 
@@ -143,8 +154,9 @@
 			        //alert("You have selected " + tap_list[click]);
 			        // after they have selected the language, page will be redirected
 			        //location.href="bus_number.html?selected_language=" + tap_list[click];
+
 			        window.location.replace("bus_number.html?selected_language=" + tap_list[click]);
-			        //$.mobile.changePage( "bus_number.html?selected_language=" + tap_list[click], { transition: "slideup", changeHash: false })
+			        
 			    }, 2500);
 
 			}
