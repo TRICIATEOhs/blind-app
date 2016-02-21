@@ -18,11 +18,26 @@
 				margin:0 auto;
 			}
 
-			#audio-player {
+			audio {
 				opacity: 0.1; /* This is to make the audio tag transparent/invisible */
 			}
 
 			#start_btn {
+				height: 1000px;
+				width: 800px;
+			}
+
+			#neutral_btn {
+				height: 1000px;
+				width: 800px;
+			}
+
+			#english_btn {
+				height: 1000px;
+				width: 800px;
+			}
+
+			#mandarin_btn {
 				height: 1000px;
 				width: 800px;
 			}
@@ -73,6 +88,12 @@
 				<div class="btn-group" role="group">
 				  <button type="button" class="btn btn-info col-md-12" id="start_btn">
 				  	<font size="8">TAP TO START</font></button>
+			  	<button type="button" class="btn btn-info col-md-12" id="neutral_btn">
+				  	<font size="8">TAP TO START</font></button>
+			  	<button type="button" class="btn btn-primary col-md-12" id="english_btn">
+				  	<font size="8">English</font></button>
+			  	<button type="button" class="btn btn-primary col-md-12" id="mandarin_btn">
+				  	<font size="8">Mandarin</font></button>
 				</div>
 			</div>
 
@@ -98,7 +119,9 @@
 	navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 	$(document).ready(function () {
-
+		$('#neutral_btn').hide();
+		$('#english_btn').hide();
+		$('#mandarin_btn').hide();
 		
 		//once the app is launched, the user will feel a vibration, which will trigger the user to tap the screen once
 		var start_vibrate = setTimeout(function()
@@ -163,11 +186,19 @@
 
 			if(tap_list[click] != "-") {
 				stopAudio();
-
+				
 				if(tap_list[click] == 'English') {
-					playEnglishAudio();
+					$('#start_btn').hide();
+					$('#neutral_btn').hide();
+					$('#english_btn').show();
+					$('#mandarin_btn').hide();
+					//playEnglishAudio();
 				} else {
-					playMandarinAudio();
+					$('#start_btn').hide();
+					$('#neutral_btn').hide();
+					$('#english_btn').hide();
+					$('#mandarin_btn').show();
+					//playMandarinAudio();
 				}
 				
 
@@ -188,6 +219,7 @@
 		var audioPlayer = document.getElementById('audio-player');
     	audioPlayer.play();
     	$('#start_btn').hide();
+    	$('#neutral_btn').show();
 	});
 
 	function stopAudio() {
@@ -196,7 +228,7 @@
 	    //audioPlayer.currentTime = 0;
 	}//stopAudio()
 
-	function playEnglishAudio() {
+	$('#neutral_btn').click(function() {
 		$.each($('audio'), function () {
     		this.pause();
     		this.currentTime = 0; // Reset time
@@ -206,9 +238,21 @@
 
 		var audioPlayer = document.getElementById('english-audio-player');
 		audioPlayer.play();
-	}// end play english audio
+	});// end play english audio
 
-	function playMandarinAudio() {
+	$('#mandarin_btn').click(function() {
+		$.each($('audio'), function () {
+    		this.pause();
+    		this.currentTime = 0; // Reset time
+		});
+
+		$('#english-audio-player').html('<source src="sound-guide/English.mp3" type="audio/mpeg"> Your browser does not support the audio element.');
+
+		var audioPlayer = document.getElementById('english-audio-player');
+		audioPlayer.play();
+	});// end play english audio
+
+	$('#english_btn').click(function() {
 		$.each($('audio'), function () {
     		this.pause();
     		this.currentTime = 0; // Reset time
@@ -219,7 +263,7 @@
 
 		var audioPlayer = document.getElementById('mandarin-audio-player');
 		audioPlayer.play();
-	}// end play mandarin audio
+	});// end play mandarin audio
 
 
 
