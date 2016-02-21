@@ -45,6 +45,14 @@
 					  Your browser does not support the audio element.
 					</audio>
 
+					<!-- This is for english -->
+					<audio controls id="english-audio-player">
+					</audio>
+
+					<!-- This is for mandarin -->
+					<audio controls id="mandarin-audio-player">
+					</audio>
+
 					<h1>Language Selection <small><i>in process...</i></small></h1>
 				</div>
 			</div>
@@ -124,10 +132,17 @@
 		$('.numberOfTaps .tapValue').html('<font color="red">' + tap_list[click] + '</font>');
 
 		if(tap_list[click] != "-") {
+			stopAudio();
+
+			if(tap_list[click] == 'English') {
+				playEnglishAudio();
+			} else {
+				playMandarinAudio();
+			}
+
 			clearTimeout(timeout);
 			timeout = setTimeout(function()
 		    {
-		        stopAudio();
 		        window.location.replace("bus_number.html?selected_language=" + tap_list[click]);
 		        
 		    }, 2500);
@@ -147,18 +162,21 @@
 			$('.numberOfTaps .tapValue').html('<font color="red">' + tap_list[click] + '</font>');
 
 			if(tap_list[click] != "-") {
+				stopAudio();
+
+				if(tap_list[click] == 'English') {
+					playEnglishAudio();
+				} else {
+					playMandarinAudio();
+				}
+				
+
 				clearTimeout(timeout);
 				timeout = setTimeout(function()
 			    {
-			        stopAudio();
-			        //alert("You have selected " + tap_list[click]);
-			        // after they have selected the language, page will be redirected
-			        //location.href="bus_number.html?selected_language=" + tap_list[click];
-
 			        window.location.replace("bus_number.html?selected_language=" + tap_list[click]);
 			        
 			    }, 2500);
-
 			}
 
 		}//end if mobile_usage
@@ -178,6 +196,30 @@
 	    //audioPlayer.currentTime = 0;
 	}//stopAudio()
 
+	function playEnglishAudio() {
+		$.each($('audio'), function () {
+    		this.pause();
+    		this.currentTime = 0; // Reset time
+		});
+
+		$('#english-audio-player').html('<source src="sound-guide/English.mp3" type="audio/mpeg"> Your browser does not support the audio element.');
+
+		var audioPlayer = document.getElementById('english-audio-player');
+		audioPlayer.play();
+	}// end play english audio
+
+	function playMandarinAudio() {
+		$.each($('audio'), function () {
+    		this.pause();
+    		this.currentTime = 0; // Reset time
+		});
+
+
+		$('#mandarin-audio-player').html('<source src="sound-guide/Mandarin.mp3" type="audio/mpeg"> Your browser does not support the audio element.');
+
+		var audioPlayer = document.getElementById('mandarin-audio-player');
+		audioPlayer.play();
+	}// end play mandarin audio
 
 
 

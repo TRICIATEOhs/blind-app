@@ -78,6 +78,7 @@
 
 	$(document).ready(function () {
 
+
 		$('#listen_input').hide(); //this will only show when system is ready to listen for input
 
 		//this will return selected_language=English/Mandarin 
@@ -89,13 +90,10 @@
 
 		//once the app is launched, the user will feel a vibration, which will trigger the user to tap the screen once. After
 		// tapping the screen, the audio-player will be played to request for bus number
-		var start_vibrate = setTimeout(function()
-						    {
-				        		if (navigator.vibrate) {
-								    navigator.vibrate(1000);
-								}
-						    }, 2000);
-
+		if (navigator.vibrate) {
+		    navigator.vibrate(1000);
+		} //end navigator vibrate
+    
 
 		function blinker() {
 			$('.blinking').fadeOut(300);
@@ -103,12 +101,15 @@
 		}
 		setInterval(blinker, 1000);
 
+
 		$('#start_btn').click(function() {
 			var audioPlayer = document.getElementById('audio-player');
 	    	audioPlayer.play();
 	    	$('#start_btn').hide();
 	    	//$('#listen_input').show();
 		});
+
+
 
 
 	});
