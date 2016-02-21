@@ -154,22 +154,30 @@
 		click = click + 1;
 		$('.numberOfTaps .tapValue').html('<font color="red">' + tap_list[click] + '</font>');
 
-		if(tap_list[click] != "-") {
-			stopAudio();
-
-			if(tap_list[click] == 'English') {
-				playEnglishAudio();
-			} else {
-				playMandarinAudio();
-			}
-
-			clearTimeout(timeout);
-			timeout = setTimeout(function()
-		    {
-		        window.location.replace("bus_number.html?selected_language=" + tap_list[click]);
-		        
-		    }, 2500);
-		}
+			if(tap_list[click] != "-") {
+				stopAudio();
+				
+				if(tap_list[click] == 'English') {
+					$('#start_btn').hide();
+					$('#neutral_btn').hide();
+					$('#english_btn').show();
+					$('#mandarin_btn').hide();
+					//playEnglishAudio();
+				} else {
+					$('#start_btn').hide();
+					$('#neutral_btn').hide();
+					$('#english_btn').hide();
+					$('#mandarin_btn').show();
+					//playMandarinAudio();
+				}
+				
+				clearTimeout(timeout);
+				timeout = setTimeout(function()
+			    {
+			        window.location.replace("bus_number.html?selected_language=" + tap_list[click]);
+			        
+			    }, 2500);
+			}//end if tap list is not -
 	});
 
 
@@ -201,14 +209,13 @@
 					//playMandarinAudio();
 				}
 				
-
 				clearTimeout(timeout);
 				timeout = setTimeout(function()
 			    {
 			        window.location.replace("bus_number.html?selected_language=" + tap_list[click]);
 			        
 			    }, 2500);
-			}
+			}//end if tap list is not -
 
 		}//end if mobile_usage
 
